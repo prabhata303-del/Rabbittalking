@@ -1,5 +1,3 @@
---- START OF FILE Paste February 19, 2026 - 10:53PM ---
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -198,6 +196,679 @@
         .tap-zone {
             position: absolute;
             z-index: 5;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .tap-zone-head {
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 150px;
+        }
+
+        .tap-zone-body {
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 200px;
+            border-radius: 40%;
+        }
+
+        .tap-zone-feet {
+            bottom: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        /* ===== FALLING ICONS ANIMATION ===== */
+        .falling-icon {
+            position: absolute;
+            font-size: 35px;
+            pointer-events: none;
+            z-index: 150;
+            animation: smoothFall 4s ease-in forwards;
+        }
+
+        @keyframes smoothFall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(360deg) scale(0.5);
+            }
+        }
+
+        /* ===== CONTROL PANEL ===== */
+        .control-panel {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        /* ===== COMMON BUTTON STYLE (GLOSSY) ===== */
+        .action-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, #ff69b4 0%, #ff1493 100%);
+            border: 5px solid #d6006e;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.6), inset 0 3px 10px rgba(255,255,255,0.5);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 42px;
+        }
+
+        .action-button:active {
+            transform: scale(0.9);
+        }
+
+        /* ===== LAUGHING BUTTON ===== */
+        .btn-laughing {
+            background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
+            border-color: #d97706;
+        }
+
+        /* ===== MIC BUTTON ===== */
+        .btn-mic {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(180deg, #ff69b4 0%, #ff1493 100%);
+            border-color: #d6006e;
+            font-size: 0;
+        }
+
+        .btn-mic::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            width: 20px;
+            height: 30px;
+            background: white;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .btn-mic::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 15px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .mic-button-base {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .btn-mic.listening {
+            animation: pulseMic 1.5s ease-in-out infinite;
+            background: linear-gradient(180deg, #a78bfa 0%, #8b5cf6 100%);
+            border-color: #7c3aed;
+        }
+
+        @keyframes pulseMic {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(139, 92, 246, 0.6), inset 0 3px 10px rgba(255,255,255,0.5);
+            }
+            50% {
+                transform: scale(1.15);
+                box-shadow: 0 15px 45px rgba(139, 92, 246, 1), inset 0 3px 10px rgba(255,255,255,0.7), 0 0 30px rgba(139, 92, 246, 0.8);
+            }
+        }
+
+        .btn-mic.speaking {
+            animation: glowMic 0.8s ease-in-out infinite;
+            background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
+            border-color: #d97706;
+        }
+
+        @keyframes glowMic {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(251, 191, 36, 0.6), inset 0 3px 10px rgba(255,255,255,0.5);
+            }
+            50% {
+                box-shadow: 0 15px 45px rgba(251, 191, 36, 1), inset 0 3px 10px rgba(255,255,255,0.7), 0 0 30px rgba(251, 191, 36, 0.8);
+            }
+        }
+
+        /* ===== MUSIC BUTTON ===== */
+        .btn-music {
+            background: linear-gradient(180deg, #a78bfa 0%, #8b5cf6 100%);
+            border-color: #7c3aed;
+        }
+
+        /* ===== STATUS INDICATOR ===== */
+        .status-text {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(180deg, rgba(139,92,246,0.95) 0%, rgba(124,58,237,0.95) 100%);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4), inset 0 2px 8px rgba(255,255,255,0.3);
+            border: 3px solid rgba(255,255,255,0.4);
+        }
+
+        .status-text.show {
+            opacity: 1;
+        }
+
+        /* ===== SHAKE ANIMATION ===== */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px) rotate(-2deg); }
+            75% { transform: translateX(10px) rotate(2deg); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease;
+        }
+
+        /* ===== EXIT CONFIRMATION DIALOG ===== */
+        .exit-dialog {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .exit-dialog.show {
+            display: flex;
+        }
+
+        .exit-dialog-box {
+            background: linear-gradient(180deg, #8b5cf6 0%, #7c3aed 100%);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 3px 15px rgba(255,255,255,0.3);
+            text-align: center;
+            max-width: 320px;
+            border: 5px solid rgba(255,255,255,0.3);
+        }
+
+        .exit-dialog-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.5);
+        }
+
+        .exit-dialog-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .exit-btn {
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border: 4px solid;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .exit-btn-yes {
+            background: linear-gradient(180deg, #ff69b4 0%, #ff1493 100%);
+            color: white;
+            border-color: #d6006e;
+            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.5), inset 0 2px 8px rgba(255,255,255,0.5);
+        }
+
+        .exit-btn-no {
+            background: linear-gradient(180deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            border-color: #0e7490;
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.5), inset 0 2px 8px rgba(255,255,255,0.5);
+        }
+
+        .exit-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== RIPPLE EFFECT ===== */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: rippleEffect 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* ===== SCREEN TRANSITIONS ===== */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ===== PARTICLE EFFECT ===== */
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            z-index: 100;
+            font-size: 30px;
+            animation: particleFloat 1.5s ease-out forwards;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-120px) scale(0.3) rotate(180deg);
+            }
+        }
+
+        /* ===== RESPONSIVE MOBILE VIEW ===== */
+        @media (max-width: 600px) {
+            .action-button {
+                width: 70px;
+                height: 70px;
+                font-size: 36px;
+            }
+            
+            .btn-mic {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .control-panel {
+                gap: 25px;
+                bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- GOOGLE SIGN-IN SCREEN (THIS IS SHOWN FIRST FOR NEW USERS) -->
+    <div id="signInScreen">
+        <img src="tom_welcome.jpg" alt="Welcome Rabbit" class="welcome-image">
+        <div class="signin-text">Sign in to play with Rabbit!</div>
+        <div id="googleSignInButton"></div>
+    </div>
+
+    <!-- WELCOME SCREEN (SHOWN AFTER SIGN-IN OR FOR RETURNING USERS) -->
+    <div id="welcomeScreen">
+        <img src="tom_welcome.jpg" alt="Welcome" class="welcome-image">
+        <button class="play-button" id="enterBtn">
+            <span style="position: relative; z-index: 1;">▶ Play</span>
+        </button>
+    </div>
+
+    <!-- MAIN APP SCREEN -->
+    <div id="mainScreen">
+        <div class="status-text" id="statusText">Ready</div>
+        
+        <div class="video-container" id="videoContainer">
+            <!-- Videos -->
+            <video id="videoStanding" class="tom-video active" playsinline muted loop preload="auto"><source src="tom_standing.mp4" type="video/mp4"></video>
+            <video id="videoListening" class="tom-video" playsinline muted preload="auto"><source src="tom_listing.mp4" type="video/mp4"></video>
+            <video id="videoTalking" class="tom-video" playsinline muted preload="auto"><source src="tom_talking.mp4" type="video/mp4"></video>
+            <video id="videoLaughing" class="tom-video" playsinline muted preload="auto"><source src="laughing.mp4" type="video/mp4"></video>
+            <video id="videoMusic" class="tom-video" playsinline muted preload="auto"><source src="music.mp4" type="video/mp4"></video>
+
+            <!-- Tap Zones -->
+            <div class="tap-zone tap-zone-head" id="tapHead"></div>
+            <div class="tap-zone tap-zone-body" id="tapBody"></div>
+            <div class="tap-zone tap-zone-feet" id="tapFeet"></div>
+        </div>
+
+        <div class="control-panel">
+            <button class="action-button btn-laughing" id="laughingBtn">😄</button>
+            <button class="action-button btn-mic" id="micBtn">
+                <div class="mic-button-base"></div>
+            </button>
+            <button class="action-button btn-music" id="musicBtn">🎵</button>
+        </div>
+    </div>
+
+    <!-- EXIT DIALOG -->
+    <div class="exit-dialog" id="exitDialog">
+        <div class="exit-dialog-box">
+            <div class="exit-dialog-text">Do you want to exit?</div>
+            <div class="exit-dialog-buttons">
+                <button class="exit-btn exit-btn-yes" id="exitYesBtn">Yes</button>
+                <button class="exit-btn exit-btn-no" id="exitNoBtn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUDIO ELEMENTS -->
+    <audio id="audioLaughing" src="laughing.wav" preload="auto"></audio>
+    <audio id="audioMusic" src="music.wav" preload="auto"></audio>
+
+    <script>
+        // GOOGLE SIGN-IN LOGIC
+        const signInScreen = document.getElementById('signInScreen');
+        const googleSignInButton = document.getElementById('googleSignInButton');
+
+        function handleSignIn(response) {
+            console.log("Google Sign-In Successful:", response);
+            localStorage.setItem('hasSignedIn', 'true');
+            signInScreen.style.transition = 'opacity 0.5s ease';
+            signInScreen.style.opacity = '0';
+            setTimeout(() => {
+                signInScreen.style.display = 'none';
+                const welcomeScreenEl = document.getElementById('welcomeScreen');
+                welcomeScreenEl.style.display = 'flex';
+                welcomeScreenEl.classList.add('fade-in');
+            }, 500);
+        }
+
+        window.onload = function () {
+            if (localStorage.getItem('hasSignedIn') === 'true') {
+                signInScreen.style.display = 'none';
+                document.getElementById('welcomeScreen').style.display = 'flex';
+            } else {
+                google.accounts.id.initialize({
+                    // === VALUE UPDATED FROM YOUR google-services.json FILE ===
+                    client_id: "767646461996-8al36esmt89eoul61mngccbicljnm9kv.apps.googleusercontent.com",
+                    callback: handleSignIn
+                });
+                google.accounts.id.renderButton(
+                    googleSignInButton,
+                    { theme: "filled_blue", size: "large", type: "standard", shape: "pill", text: "signin_with" }
+                );
+            }
+        };
+
+        // ===== APP STATE MANAGEMENT =====
+        const AppState = { WELCOME: 'welcome', IDLE: 'idle', LISTENING: 'listening', TALKING: 'talking', LAUGHING: 'laughing', MUSIC: 'music' };
+        let currentState = AppState.WELCOME;
+        let isProcessing = false;
+        let mediaRecorder, audioChunks = [], audioContext, currentAudioSource;
+        let laughingPlayCount = 0, musicPlayCount = 0;
+
+        // ===== DOM ELEMENTS =====
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const mainScreen = document.getElementById('mainScreen');
+        const enterBtn = document.getElementById('enterBtn');
+        const micBtn = document.getElementById('micBtn');
+        const laughingBtn = document.getElementById('laughingBtn');
+        const musicBtn = document.getElementById('musicBtn');
+        const statusText = document.getElementById('statusText');
+        const exitDialog = document.getElementById('exitDialog');
+        const exitYesBtn = document.getElementById('exitYesBtn');
+        const exitNoBtn = document.getElementById('exitNoBtn');
+        const videoContainer = document.getElementById('videoContainer');
+        const videos = {
+            standing: document.getElementById('videoStanding'),
+            listening: document.getElementById('videoListening'),
+            talking: document.getElementById('videoTalking'),
+            laughing: document.getElementById('videoLaughing'),
+            music: document.getElementById('videoMusic')
+        };
+        const audios = {
+            laughing: document.getElementById('audioLaughing'),
+            music: document.getElementById('audioMusic')
+        };
+        
+        // ===== VIDEO & UI FUNCTIONS =====
+        function switchVideo(targetVideo, enableLoop = false) {
+            Object.values(videos).forEach(v => {
+                v.pause();
+                v.classList.remove('active');
+            });
+            targetVideo.classList.add('active');
+            targetVideo.currentTime = 0;
+            targetVideo.loop = enableLoop;
+            targetVideo.play().catch(err => console.log('Play error:', err));
+        }
+
+        function showStatus(message, duration = 2000) {
+            statusText.textContent = message;
+            statusText.classList.add('show');
+            setTimeout(() => statusText.classList.remove('show'), duration);
+        }
+
+        function createRipple(event, element) {
+            const ripple = document.createElement('span');
+            const rect = element.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${event.clientX - rect.left - size / 2}px`;
+            ripple.style.top = `${event.clientY - rect.top - size / 2}px`;
+            ripple.classList.add('ripple');
+            element.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        }
+
+        function vibrate(duration = 50) {
+            if ('vibrate' in navigator) navigator.vibrate(duration);
+        }
+
+        function resetToIdle() {
+            currentState = AppState.IDLE;
+            micBtn.classList.remove('listening', 'speaking');
+            Object.values(audios).forEach(audio => {
+                audio.onended = null;
+                audio.pause();
+                audio.currentTime = 0;
+            });
+            switchVideo(videos.standing, true);
+            showStatus('Ready!', 1500);
+            isProcessing = false;
+        }
+
+        // ===== EVENT LISTENERS =====
+        enterBtn.addEventListener('click', (e) => {
+            createRipple(e, enterBtn);
+            vibrate();
+            welcomeScreen.classList.add('hidden');
+            mainScreen.classList.add('active', 'fade-in');
+            currentState = AppState.IDLE;
+            videos.standing.muted = true;
+            switchVideo(videos.standing, true);
+            showStatus('Tap anywhere on Rabbit!', 3000);
+        });
+
+        const handleAudioInteraction = (e, button, state, video, audio, message) => {
+            if (currentState !== AppState.IDLE) return;
+            createRipple(e, button);
+            vibrate();
+            currentState = state;
+            isProcessing = true;
+            let playCount = 0;
+            switchVideo(video, true);
+            audio.currentTime = 0;
+            audio.play().catch(err => console.log('Audio error:', err));
+            showStatus(message, 3000);
+            audio.onended = () => {
+                playCount++;
+                if (playCount < 2) {
+                    audio.currentTime = 0;
+                    audio.play().catch(err => console.log('Audio replay error:', err));
+                } else {
+                    resetToIdle();
+                }
+            };
+        };
+
+        laughingBtn.addEventListener('click', (e) => handleAudioInteraction(e, laughingBtn, AppState.LAUGHING, videos.laughing, audios.laughing, 'Ha ha ha ha!'));
+        musicBtn.addEventListener('click', (e) => handleAudioInteraction(e, musicBtn, AppState.MUSIC, videos.music, audios.music, 'Let\'s dance!'));
+        
+        micBtn.addEventListener('click', async (e) => {
+            createRipple(e, micBtn);
+            vibrate();
+            if (isProcessing) return showStatus('Please wait...', 1000);
+            if (currentState === AppState.LISTENING) return stopRecording();
+            if (currentState === AppState.TALKING && currentAudioSource) {
+                currentAudioSource.stop();
+                resetToIdle();
+                return;
+            }
+            isProcessing = true;
+            await startRecording();
+            isProcessing = false;
+        });
+
+        // ===== AUDIO RECORDING LOGIC =====
+        async function startRecording() {
+            try {
+                audioChunks = [];
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } });
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.ondataavailable = e => e.data.size > 0 && audioChunks.push(e.data);
+                mediaRecorder.onstop = () => {
+                    stream.getTracks().forEach(track => track.stop());
+                    processAndPlayAudio();
+                };
+                mediaRecorder.start();
+                currentState = AppState.LISTENING;
+                micBtn.classList.add('listening');
+                switchVideo(videos.listening, false);
+                showStatus('Listening...', 5000);
+                setTimeout(() => mediaRecorder?.state === 'recording' && stopRecording(), 5000);
+            } catch (error) {
+                showStatus('Mic access denied', 3000);
+                resetToIdle();
+            }
+        }
+
+        function stopRecording() {
+            if (mediaRecorder?.state === 'recording') {
+                mediaRecorder.stop();
+                showStatus('Processing...', 2000);
+            }
+        }
+
+        async function processAndPlayAudio() {
+            if (audioChunks.length === 0) return resetToIdle();
+            try {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                const arrayBuffer = await audioBlob.arrayBuffer();
+                audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+                const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                if (currentAudioSource) currentAudioSource.stop();
+                const source = audioContext.createBufferSource();
+                source.buffer = audioBuffer;
+                source.playbackRate.value = 1.5;
+                source.connect(audioContext.destination);
+                currentAudioSource = source;
+                currentState = AppState.TALKING;
+                micBtn.classList.replace('listening', 'speaking');
+                switchVideo(videos.talking, false);
+                showStatus('Rabbit speaking...', 3000);
+                source.start(0);
+                source.onended = () => {
+                    currentAudioSource = null;
+                    setTimeout(resetToIdle, 500);
+                };
+            } catch (error) {
+                showStatus('Processing failed', 2000);
+                resetToIdle();
+            }
+        }
+
+        // ===== BACK BUTTON & EXIT DIALOG =====
+        window.addEventListener('popstate', (e) => {
+            e.preventDefault();
+            if (currentState !== AppState.WELCOME) {
+                exitDialog.classList.add('show');
+                history.pushState(null, null, window.location.href);
+            }
+        });
+
+        exitYesBtn.addEventListener('click', () => {
+            vibrate();
+            mainScreen.classList.remove('active');
+            exitDialog.classList.remove('show');
+            resetToIdle();
+            if (localStorage.getItem('hasSignedIn') === 'true') {
+                 welcomeScreen.style.display = 'flex';
+                 welcomeScreen.classList.remove('hidden');
+            } else {
+                 signInScreen.style.display = 'flex';
+                 signInScreen.style.opacity = '1';
+            }
+            currentState = AppState.WELCOME;
+        });
+
+        exitNoBtn.addEventListener('click', () => {
+            vibrate();
+            exitDialog.classList.remove('show');
+        });
+
+        // ===== INITIALIZE & LOAD =====
+        console.log('🐰 Talking Rabbit App Ready');
+        Object.values(videos).forEach(video => {
+            video.load();
+            video.addEventListener('error', (e) => console.error('❌ Video error:', video.id, e));
+            video.addEventListener('loadeddata', () => console.log('✅ Video loaded:', video.id));
+        });
+        history.pushState(null, null, window.location.href);
+    </script>
+</body>
+</html>            z-index: 5;
             border-radius: 50%;
             cursor: pointer;
         }
